@@ -1,20 +1,25 @@
-package server
+package main
 
 import (
 	"log"
 	"net/http"
+
+	"github.com/tflorimo/habit-tracker/internal/handler"
 
 	"github.com/tflorimo/habit-tracker/internal/config"
 )
 
 func main() {
 	cfg := config.NewConfig()
+	http.HandleFunc("/", handler.HandleRoot)
+	http.HandleFunc("/habits", handler.HandleHabitRoutes)
+	http.HandleFunc("/habits/tracking", handler.HandleTrackingRoutes)
+	http.HandleFunc("/habits/category", handler.HandleCategoryRoutes)
 
-	http.ListenAndServe(":"+cfg.HttpPort, nil)
 	log.Printf("Server started on port %s", cfg.HttpPort)
+	err := http.ListenAndServe(":"+cfg.HttpPort, nil)
+	if err != nil {
+		log.Fatalf("Error starting server: %v", err)
+	}
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Hello, World!"))
-		log.Println("Request received")
-	})
 }

@@ -9,13 +9,13 @@ type HabitTrack struct {
 	UpdatedAt time.Time
 }
 
-func newHabitTrack(ID int, HabitID int) *HabitTrack {
+func NewHabitTrack(ID int, HabitID int) *HabitTrack {
 	hTrack := HabitTrack{ID: ID, HabitID: HabitID}
 	hTrack.CreatedAt = time.Now()
 
 	return &hTrack
 }
 
-func setUpdatedNow(hTrack *HabitTrack) {
+func SetUpdatedNow(hTrack *HabitTrack) {
 	hTrack.UpdatedAt = time.Now()
 }
