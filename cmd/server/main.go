@@ -12,7 +12,7 @@ import (
 func main() {
 	cfg := config.NewConfig()
 	http.HandleFunc("/", handler.HandleRoot)
-	http.HandleFunc("/habits", handler.HandleHabitRoutes)
+	http.HandleFunc("/habits", handler.NewHabitHandler().HandleHabitRoutes)
 	http.HandleFunc("/habits/tracking", handler.HandleTrackingRoutes)
 	http.HandleFunc("/habits/category", handler.HandleCategoryRoutes)
 
